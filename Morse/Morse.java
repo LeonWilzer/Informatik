@@ -64,13 +64,16 @@ public class Morse {
         morseAlphabet.enqueue('z');
         morseAlphabet.enqueue('q');
 
+        // Preparing Tree setup
         TreeHelper<Character> btrBuilder = new TreeHelper<Character>();
         btrBuilder.setTreeQueue(morseAlphabet);
         btrBuilder.setBreakCondition('\u0000');
+
+        // Building tree
         morseTree = btrBuilder.buildBinTree('\u0000');
 
         // Alphabet test
-        System.out.println(translator(".- -... -.-. -.. . ..-. --. .... .. .--- -.- .-.. -- -. --- .--. --.- .-. ... - ..- ...- .-- -..- -.-- --.."));
+        // System.out.println(translator(".- -... -.-. -.. . ..-. --. .... .. .--- -.- .-.. -- -. --- .--. --.- .-. ... - ..- ...- .-- -..- -.-- --.."));
     }
 
 
