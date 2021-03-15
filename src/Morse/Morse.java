@@ -19,12 +19,24 @@ public class Morse {
         morseAlphabet.enqueue('u');
         morseAlphabet.enqueue('h');
         morseAlphabet.enqueue('v');
+        morseAlphabet.enqueue('5');
+        morseAlphabet.enqueue('4');
+        morseAlphabet.enqueue('\u0000');
+        morseAlphabet.enqueue('\u0000');
+        morseAlphabet.enqueue('\u0000');
+        morseAlphabet.enqueue('\u0000');
+        morseAlphabet.enqueue('\u0000');
+        morseAlphabet.enqueue('3');
         morseAlphabet.enqueue('\u0000');
         morseAlphabet.enqueue('\u0000');
         morseAlphabet.enqueue('\u0000');
         morseAlphabet.enqueue('\u0000');
         morseAlphabet.enqueue('f');
+        morseAlphabet.enqueue('ü');
         morseAlphabet.enqueue('\u0000');
+        morseAlphabet.enqueue('\u0000');
+        morseAlphabet.enqueue('\u0000');
+        morseAlphabet.enqueue('2');
         morseAlphabet.enqueue('\u0000');
         morseAlphabet.enqueue('\u0000');
         morseAlphabet.enqueue('\u0000');
@@ -32,13 +44,17 @@ public class Morse {
         morseAlphabet.enqueue('r');
         morseAlphabet.enqueue('w');
         morseAlphabet.enqueue('l');
-        morseAlphabet.enqueue('\u0000');
+        morseAlphabet.enqueue('ä');
         morseAlphabet.enqueue('\u0000');
         morseAlphabet.enqueue('\u0000');
         morseAlphabet.enqueue('\u0000');
         morseAlphabet.enqueue('\u0000');
         morseAlphabet.enqueue('p');
         morseAlphabet.enqueue('j');
+        morseAlphabet.enqueue('\u0000');
+        morseAlphabet.enqueue('\u0000');
+        morseAlphabet.enqueue('\u0000');
+        morseAlphabet.enqueue('1');
         morseAlphabet.enqueue('\u0000');
         morseAlphabet.enqueue('\u0000');
         morseAlphabet.enqueue('\u0000');
@@ -49,6 +65,10 @@ public class Morse {
         morseAlphabet.enqueue('k');
         morseAlphabet.enqueue('b');
         morseAlphabet.enqueue('x');
+        morseAlphabet.enqueue('6');
+        morseAlphabet.enqueue('\u0000');
+        morseAlphabet.enqueue('\u0000');
+        morseAlphabet.enqueue('\u0000');
         morseAlphabet.enqueue('\u0000');
         morseAlphabet.enqueue('\u0000');
         morseAlphabet.enqueue('\u0000');
@@ -63,6 +83,24 @@ public class Morse {
         morseAlphabet.enqueue('o');
         morseAlphabet.enqueue('z');
         morseAlphabet.enqueue('q');
+        morseAlphabet.enqueue('7');
+        morseAlphabet.enqueue('\u0000');
+        morseAlphabet.enqueue('\u0000');
+        morseAlphabet.enqueue('\u0000');
+        morseAlphabet.enqueue('\u0000');
+        morseAlphabet.enqueue('\u0000');
+        morseAlphabet.enqueue('\u0000');
+        morseAlphabet.enqueue('\u0000');
+        morseAlphabet.enqueue('ö');
+        morseAlphabet.enqueue('?');
+        morseAlphabet.enqueue('8');
+        morseAlphabet.enqueue('\u0000');
+        morseAlphabet.enqueue('\u0000');
+        morseAlphabet.enqueue('\u0000');
+        morseAlphabet.enqueue('\u0000');
+        morseAlphabet.enqueue('\u0000');
+        morseAlphabet.enqueue('9');
+        morseAlphabet.enqueue('0');
 
         // Preparing Tree setup
         TreeHelper<Character> btrBuilder = new TreeHelper<Character>();
@@ -72,13 +110,13 @@ public class Morse {
         // Building tree
         morseTree = btrBuilder.buildBinTree('\u0000');
 
-        /*
+        // /*
         // Alphabet test
         System.out.println(decode(".- -... -.-. -.. . ..-. --. .... .. .--- -.- .-.. -- -. --- .--. --.- .-. ... - ..- ...- .-- -..- -.-- --.."));
         System.out.println(encode("abcdefghijklmnopqrstuvwxyz"));
         if(decode(encode("abcdefghijklmnopqrstuvwxyz"))=="abcdefghijklmnopqrstuvwxyzu");
             System.out.println(true);
-        */
+        // */
     }
 
 
