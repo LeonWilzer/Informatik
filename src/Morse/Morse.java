@@ -72,12 +72,17 @@ public class Morse {
         // Building tree
         morseTree = btrBuilder.buildBinTree('\u0000');
 
+        /*
         // Alphabet test
-        // System.out.println(translator(".- -... -.-. -.. . ..-. --. .... .. .--- -.- .-.. -- -. --- .--. --.- .-. ... - ..- ...- .-- -..- -.-- --.."));
+        System.out.println(decode(".- -... -.-. -.. . ..-. --. .... .. .--- -.- .-.. -- -. --- .--. --.- .-. ... - ..- ...- .-- -..- -.-- --.."));
+        System.out.println(encode("abcdefghijklmnopqrstuvwxyz"));
+        if(decode(encode("abcdefghijklmnopqrstuvwxyz"))=="abcdefghijklmnopqrstuvwxyzu");
+            System.out.println(true);
+        */
     }
 
 
-    public String translator(String pMorse){
+    public String decode(String pMorse){
         char[] morseArray = pMorse.toCharArray();
         String curString = "";
         BinaryTree<Character> curTree = morseTree;
@@ -103,5 +108,37 @@ public class Morse {
         }
         curString += curTree.getContent();
         return curString;
+    }
+
+    public String encode(String pSentence)
+    {
+        String encodedText = "";
+        for(char i : pSentence.toLowerCase().toCharArray())
+        {
+            if(Character.isLetter(i))
+                encodedText += encodeChar(i, morseTree) + "|";
+        }
+        return encodedText;
+    }
+
+    public String encodeChar(char pClear, BinaryTree<Character> pMorseTree)
+    {
+        if(pMorseTree.getContent() == pClear)
+            return "";
+
+        String morseCode;
+        if(!pMorseTree.getLeftTree().isEmpty())
+        {
+            morseCode = encodeChar(pClear, pMorseTree.getLeftTree());
+            if (morseCode != null)
+                return "." + morseCode;
+        }
+        if(!pMorseTree.getRightTree().isEmpty())
+        {
+            morseCode = encodeChar(pClear, pMorseTree.getRightTree());
+            if(morseCode != null)
+                return "-" + morseCode;
+        }
+        return null;
     }
 }
