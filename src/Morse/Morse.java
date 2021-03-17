@@ -110,13 +110,13 @@ public class Morse {
         // Building tree
         morseTree = btrBuilder.buildBinTree('\u0000');
 
-        // /*
+        /*
         // Alphabet test
         System.out.println(decode(".- -... -.-. -.. . ..-. --. .... .. .--- -.- .-.. -- -. --- .--. --.- .-. ... - ..- ...- .-- -..- -.-- --.."));
         System.out.println(encode("abcdefghijklmnopqrstuvwxyz"));
         if(decode(encode("abcdefghijklmnopqrstuvwxyz"))=="abcdefghijklmnopqrstuvwxyzu");
             System.out.println(true);
-        // */
+        */
     }
 
 
@@ -148,13 +148,15 @@ public class Morse {
         return curString;
     }
 
-    public String encode(String pSentence)
+    public String encodeString(String pSentence)
     {
         String encodedText = "";
         for(char i : pSentence.toLowerCase().toCharArray())
         {
-            if(Character.isLetter(i))
+            if(Character.isLetterOrDigit(i))
                 encodedText += encodeChar(i, morseTree) + "|";
+            else if (Character.isWhitespace(i))
+                encodedText += i;
         }
         return encodedText;
     }

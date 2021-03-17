@@ -25,7 +25,7 @@ public class Main {
                 break;
             case 2:
                 TIO.cls();
-                TIO.prt(new Morse().encode(TIO.AskString("Please provide some clear text:")));
+                TIO.prt(new Morse().encodeString(TIO.AskString("Please provide some clear text:")));
                 break;
         }
     }
