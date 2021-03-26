@@ -10,8 +10,8 @@ public class Main {
         new Main().Menu();
     }
 
-    public void Menu(){
-
+    public void Menu()
+    {
         int choice = TIO.AskInt(
             "Please select a method for execution:\n" + 
             "0. Cancel\n" +
@@ -31,7 +31,7 @@ public class Main {
                 break;
             case 3:
                 TIO.cls();
-                new Termtree();
+                Termtree.Demo();
                 break;
         }
     }
