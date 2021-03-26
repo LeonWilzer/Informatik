@@ -1,5 +1,8 @@
 package Termtree;
 
+import java.util.LinkedList;
+import java.util.Stack;
+
 import lib.BinaryTree;
 import lib.Queue;
 import lib.TIO;
@@ -7,28 +10,13 @@ import lib.TreeHelper;
 
 public class Termtree {
 
-    private TreeHelper<String> treeBuilder;
     private Queue<String> treeQueue;
     final private BinaryTree<String> mainTree;
 
     public Termtree()
     {
-        treeBuilder = new TreeHelper<String>();
-        treeQueue = new Queue<String>();
-        treeQueue.enqueue("*");
-        treeQueue.enqueue("/");
-        treeQueue.enqueue("4");
-        treeQueue.enqueue("4");
-        treeQueue.enqueue("\u0000");
-        treeQueue.enqueue("\u0000");
-        treeQueue.enqueue("\u0000");
-        treeQueue.enqueue("\u0000");
-        treeQueue.enqueue("4");
-        treeQueue.enqueue("3");
 
-        treeBuilder.setTreeQueue(treeQueue);
-        treeBuilder.setBreakCondition("\u0000");
-        mainTree = treeBuilder.buildBinTree("+");
+        mainTree = PostfixToTree(StringToStack("4 4 * 4 3 / +"));
         TIO.prt(ToPreorder(mainTree));
         TIO.prt(ToInorder(mainTree));
         TIO.prt(ToPostorder(mainTree));
@@ -118,8 +106,49 @@ public class Termtree {
         return new BinaryTree<String>();
     }
 
-    public BinaryTree<String> postfixToTree(String pPostfix)
+    public Stack<String> StringToStack(String pPostfix)
     {
-        return new BinaryTree<String>();
+        char[] inputArray = pPostfix.toCharArray();
+        String curNum = "";
+        Stack<String> treeStack = new Stack<String>();
+
+        for (char i : inputArray){
+            if(Character.isDigit(i)){
+                curNum += i;
+            }
+            else
+            {
+                if(curNum != "")
+                {
+                    treeStack.push(curNum);
+                    curNum = "";
+                }
+                if(!Character.isWhitespace(i))
+                {
+                    treeStack.push(Character.toString(i));
+                }
+            }
+        }
+        return treeStack;
+    }
+
+    public BinaryTree<String> PostfixToTree(Stack<String> pTreeStack)
+    {
+        if(!pTreeStack.isEmpty())
+        {
+        BinaryTree<String> outTree = new BinaryTree<String>(pTreeStack.pop());
+        try{
+            Double.parseDouble(outTree.getContent());
+        }
+        catch(NumberFormatException e)
+        {
+            outTree.setRightTree(PostfixToTree(pTreeStack));
+            outTree.setLeftTree(PostfixToTree(pTreeStack));
+        }
+        return outTree;
+        }
+        else{
+            return null;
+        }
     }
 }
