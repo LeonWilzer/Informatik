@@ -1,22 +1,19 @@
 package Termtree;
 
-import java.util.LinkedList;
 import java.util.Stack;
 
 import lib.BinaryTree;
 import lib.Queue;
 import lib.TIO;
-import lib.TreeHelper;
 
 public class Termtree {
 
-    private Queue<String> treeQueue;
     final private BinaryTree<String> mainTree;
 
     public Termtree()
     {
 
-        mainTree = PostfixToTree(StringToStack("4 4 * 4 3 / +"));
+        mainTree = PostfixToTree(StringToStack("5 4 * 3 2 / +"));
         TIO.prt(ToPreorder(mainTree));
         TIO.prt(ToInorder(mainTree));
         TIO.prt(ToPostorder(mainTree));
@@ -34,7 +31,7 @@ public class Termtree {
         if(!pTree.getRightTree().isEmpty())
             outString += ToPreorder(pTree.getRightTree());
 
-        return outString;
+        return " " + outString;
     }
 
     public String ToInorder(BinaryTree<String> pTree)
@@ -42,13 +39,13 @@ public class Termtree {
         String outString = "";
 
         if(!pTree.getLeftTree().isEmpty())
-            outString += ToPreorder(pTree.getLeftTree());
+            outString += ToInorder(pTree.getLeftTree());
         if(!pTree.isEmpty())
             outString += pTree.getContent();
         if(!pTree.getRightTree().isEmpty())
-            outString += ToPreorder(pTree.getRightTree());
+            outString += ToInorder(pTree.getRightTree());
 
-        return outString;
+        return " " + outString + " ";
     }
 
     public String ToPostorder(BinaryTree<String> pTree)
@@ -56,13 +53,13 @@ public class Termtree {
         String outString = "";
 
         if(!pTree.getLeftTree().isEmpty())
-            outString += ToPreorder(pTree.getLeftTree());
+            outString += ToPostorder(pTree.getLeftTree());
         if(!pTree.getRightTree().isEmpty())
-            outString += ToPreorder(pTree.getRightTree());
+            outString += ToPostorder(pTree.getRightTree());
         if(!pTree.isEmpty())
             outString += pTree.getContent();
 
-        return outString;
+        return outString + " ";
     }
 
     public Double SolveTree(BinaryTree<String> pTree)
