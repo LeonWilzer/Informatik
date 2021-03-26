@@ -2,6 +2,7 @@ package Main;
 
 import lib.TIO;
 import Morse.Morse;
+import Termtree.Termtree;
 
 public class Main {
 
@@ -15,7 +16,8 @@ public class Main {
             "Please select a method for execution:\n" + 
             "0. Cancel\n" +
             "1. Morse Decoder\n" +
-            "2. Morse Encoder"
+            "2. Morse Encoder\n" +
+            "3. Termtree"
             );
         switch(choice)
         {
@@ -26,6 +28,10 @@ public class Main {
             case 2:
                 TIO.cls();
                 TIO.prt(new Morse().encode(TIO.AskString("Please provide some clear text:")));
+                break;
+            case 3:
+                TIO.cls();
+                new Termtree();
                 break;
         }
     }
