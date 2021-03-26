@@ -8,19 +8,36 @@ import lib.TIO;
 
 public class Termtree {
 
-    final private BinaryTree<String> mainTree;
-
-    public Termtree()
-    {
-
-        mainTree = PostfixToTree(StringToStack("5 4 * 3 2 / +"));
-        TIO.prt(ToPreorder(mainTree));
-        TIO.prt(ToInorder(mainTree));
-        TIO.prt(ToPostorder(mainTree));
-        TIO.prt(SolveTree(mainTree).toString());
+    static public void Demo()
+    {            
+        int choice = TIO.AskInt(
+            "What would you like to try out? \n" +
+            "0. Cancel \n" +
+            "1. Reverse Polish Calculator \n" +
+            "2. Regular Polish Notation Calculator \n" +
+            "3. Translate Regular Polish to Reverse Polish Notation \n" +
+            "4. Translate Reverse Polish to Regular Polish Notation"
+        );
+        switch(choice)
+        {
+            case 1: 
+                TIO.prt(SolveTree(PostfixToTree(StringToStack(TIO.AskString("Please provide an expression in reverse polish notation:")))).toString());
+                break;
+            case 2: 
+                TIO.prt(PostfixToTree(StringToStack(TIO.AskString("Please provide an expression in the regular Polish notation:"))).toString());
+                break;
+            case 3:
+                TIO.prt(ToPostorder(PrefixToTree(StringToQueue(TIO.AskString("Please provide some regular Polish notation:")))));
+                break;
+            case 4:
+                TIO.prt(ToPreorder(PostfixToTree(StringToStack(TIO.AskString("Please provide some reverse Polish notation:")))));
+                break;
+            default:
+                return;
+        }
     }
 
-    public String ToPreorder(BinaryTree<String> pTree)
+    static public String ToPreorder(BinaryTree<String> pTree)
     {
         String outString = "";
 
@@ -34,7 +51,7 @@ public class Termtree {
         return " " + outString;
     }
 
-    public String ToInorder(BinaryTree<String> pTree)
+    static public String ToInorder(BinaryTree<String> pTree)
     {
         String outString = "";
 
@@ -48,7 +65,7 @@ public class Termtree {
         return " " + outString + " ";
     }
 
-    public String ToPostorder(BinaryTree<String> pTree)
+    static public String ToPostorder(BinaryTree<String> pTree)
     {
         String outString = "";
 
@@ -62,7 +79,7 @@ public class Termtree {
         return outString + " ";
     }
 
-    public Double SolveTree(BinaryTree<String> pTree)
+    static public Double SolveTree(BinaryTree<String> pTree)
     {
         if(!pTree.isEmpty())
         {
@@ -98,12 +115,58 @@ public class Termtree {
         return null;
     }
 
-    public BinaryTree<String> PrefixToTree(String pPrefix)
+    static public Queue<String> StringToQueue(String pPostfix)
     {
-        return new BinaryTree<String>();
+        char[] inputArray = pPostfix.toCharArray();
+        String curNum = "";
+        Queue<String> treeQueue = new Queue<String>();
+
+        for (char i : inputArray){
+            if(Character.isDigit(i))
+            {
+                curNum += i;
+            }
+            else
+            {
+                if(curNum != "")
+                {
+                    treeQueue.enqueue(curNum);
+                    curNum = "";
+                }
+                if(!Character.isWhitespace(i))
+                {
+                    treeQueue.enqueue(Character.toString(i));
+                }
+            }
+        }
+        if(curNum != "")
+            treeQueue.enqueue(curNum);
+
+        return treeQueue;
     }
 
-    public Stack<String> StringToStack(String pPostfix)
+    static public BinaryTree<String> PrefixToTree(Queue<String> pTreeQueue)
+    {
+        if(!pTreeQueue.isEmpty())
+        {
+        BinaryTree<String> outTree = new BinaryTree<String>(pTreeQueue.front());
+        pTreeQueue.dequeue();
+        try{
+            Double.parseDouble(outTree.getContent());
+        }
+        catch(NumberFormatException e)
+        {
+            outTree.setLeftTree(PrefixToTree(pTreeQueue));
+            outTree.setRightTree(PrefixToTree(pTreeQueue));
+        }
+        return outTree;
+        }
+        else{
+            return null;
+        }
+    }
+
+    static public Stack<String> StringToStack(String pPostfix)
     {
         char[] inputArray = pPostfix.toCharArray();
         String curNum = "";
@@ -129,7 +192,7 @@ public class Termtree {
         return treeStack;
     }
 
-    public BinaryTree<String> PostfixToTree(Stack<String> pTreeStack)
+    static public BinaryTree<String> PostfixToTree(Stack<String> pTreeStack)
     {
         if(!pTreeStack.isEmpty())
         {
