@@ -19,7 +19,7 @@ public class TreeHelper<ContentType> {
         breakCondition = null;
     }
 
-    public BinaryTree<ContentType> buildBinTree(ContentType pNodeContent){
+    public BinaryTree<ContentType> buildBinTree(ContentType pRootNode){
         
         ContentType leftNode = treeQueue.front();
         treeQueue.dequeue();
@@ -28,14 +28,14 @@ public class TreeHelper<ContentType> {
         
         if((leftNode == null || leftNode == breakCondition) && (rightNode == null || rightNode == breakCondition))
         {
-            if(!(pNodeContent == null || pNodeContent == breakCondition))
-                return new BinaryTree<ContentType>(pNodeContent);
-            else
+            if(pRootNode == null || pRootNode == breakCondition)
                 return null;
+            else
+                return new BinaryTree<ContentType>(pRootNode);
         }
         else
         {
-            return new BinaryTree<ContentType>(pNodeContent, buildBinTree(leftNode), buildBinTree(rightNode));
+            return new BinaryTree<ContentType>(pRootNode, buildBinTree(leftNode), buildBinTree(rightNode));
         }
     }
 
