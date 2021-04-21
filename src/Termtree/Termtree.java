@@ -18,13 +18,14 @@ public class Termtree {
             "3. Translate Regular Polish to Reverse Polish Notation \n" +
             "4. Translate Reverse Polish to Regular Polish Notation"
         );
+
         switch(choice)
         {
             case 1: 
                 TIO.prt(SolveTree(PostfixToTree(StringToStack(TIO.AskString("Please provide an expression in reverse polish notation:")))).toString());
                 break;
             case 2: 
-                TIO.prt(PostfixToTree(StringToStack(TIO.AskString("Please provide an expression in the regular Polish notation:"))).toString());
+                TIO.prt(SolveTree(PrefixToTree(StringToQueue(TIO.AskString("Please provide an expression in the regular Polish notation:")))).toString());
                 break;
             case 3:
                 TIO.prt(ToPostorder(PrefixToTree(StringToQueue(TIO.AskString("Please provide some regular Polish notation:")))));
@@ -149,8 +150,8 @@ public class Termtree {
     {
         if(!pTreeQueue.isEmpty())
         {
-        BinaryTree<String> outTree = new BinaryTree<String>(pTreeQueue.front());
-        pTreeQueue.dequeue();
+           BinaryTree<String> outTree = new BinaryTree<String>(pTreeQueue.front());
+           pTreeQueue.dequeue();
         try{
             Double.parseDouble(outTree.getContent());
         }
@@ -171,17 +172,49 @@ public class Termtree {
         char[] inputArray = pPostfix.toCharArray();
         String curNum = "";
         Stack<String> treeStack = new Stack<String>();
+        boolean hasDigit = false;
+        boolean hasPoint = false;
 
         for (char i : inputArray){
             if(Character.isDigit(i)){
                 curNum += i;
+                hasDigit = true;
+            }
+            else if (i == '.')
+            {
+                if(hasDigit)
+                {
+                    if(hasPoint)
+                    {
+                        TIO.prt("Invalid floating point syntax!");
+                        return null;
+                    }
+                    else
+                    {
+                        hasPoint = true;
+                        curNum += '.';
+                    }
+                    }
+                else if(!hasPoint)
+                {
+                    curNum += "0.";
+                    hasDigit = false;
+                }
+                else
+                {
+
+                    TIO.prt("Invalid floating point syntax!");
+                    return null;
+                }
             }
             else
             {
-                if(curNum != "")
+                if(!curNum.isEmpty())
                 {
                     treeStack.push(curNum);
                     curNum = "";
+                    hasPoint = false;
+                    hasDigit = false;
                 }
                 if(!Character.isWhitespace(i))
                 {
