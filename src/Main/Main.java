@@ -3,6 +3,7 @@ package Main;
 import lib.TIO;
 import Morse.Morse;
 import Termtree.Termtree;
+import UserAdministration.Benutzerverwaltung;
 
 public class Main {
 
@@ -17,7 +18,8 @@ public class Main {
             "0. Cancel\n" +
             "1. Morse Decoder\n" +
             "2. Morse Encoder\n" +
-            "3. Termtree"
+            "3. Termtree\n" + 
+            "4. Benutzerverwaltung"
             );
         switch(choice)
         {
@@ -33,6 +35,9 @@ public class Main {
                 TIO.cls();
                 Termtree.Demo();
                 break;
+            case 4:
+                TIO.cls();
+                Benutzerverwaltung.Demo();
         }
     }
 }
