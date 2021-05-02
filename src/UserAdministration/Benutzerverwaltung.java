@@ -14,9 +14,9 @@ public class Benutzerverwaltung {
         benutzerBaum.insert(new Benutzerprofil(pBenutzernamen, pPW));
     }
 
-    public void nutzerLoeschen(String pBenutzernamen, String pPW)
+    public void nutzerLoeschen(String pBenutzernamen)
     {
-        benutzerBaum.remove(new Benutzerprofil(pBenutzernamen, pPW));
+        benutzerBaum.remove(getBenutzerprofil(pBenutzernamen));
     }
 
     public boolean profilVorhanden(String pBenutzernamen)
@@ -33,7 +33,7 @@ public class Benutzerverwaltung {
         useradm.neuenNutzerAnlegen(TIO.AskString("Benutzername:"), TIO.AskString("Passwort:"));
         TIO.prt(useradm.profilVorhanden(TIO.AskString("Benutzer vorhanden?"))+"!");
         System.out.print(useradm.getBenutzerprofil(TIO.AskString("Gesuchter Benutzer:")));
-        useradm.nutzerLoeschen(TIO.AskString("Gesuchter loeschen:"), TIO.AskString("Passwort:"));
+        useradm.nutzerLoeschen(TIO.AskString("Gesuchter loeschen:"));
         TIO.prt(useradm.profilVorhanden(TIO.AskString("Benutzer vorhanden?"))+"!");
     }
 }
