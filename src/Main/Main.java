@@ -2,6 +2,7 @@ package Main;
 
 import lib.TIO;
 import Morse.Morse;
+import Nikolaus.Nikolaus;
 import Termtree.Termtree;
 import UserAdministration.Benutzerverwaltung;
 
@@ -19,7 +20,8 @@ public class Main {
             "1. Morse Decoder\n" +
             "2. Morse Encoder\n" +
             "3. Termtree\n" + 
-            "4. Benutzerverwaltung"
+            "4. Benutzerverwaltung\n" +
+            "5. Haus des Nikolaus"
             );
         switch(choice)
         {
@@ -38,6 +40,9 @@ public class Main {
             case 4:
                 TIO.cls();
                 Benutzerverwaltung.Demo();
+            case 5:
+                TIO.cls();
+                new Nikolaus();
         }
     }
 }

@@ -16,8 +16,8 @@ public class Nikolaus
 	public Nikolaus()
 	{
 		niko = genNiko();
-		TIO.prt("Ist valide? " + istValide("ABC", niko));
-		TIO.prt("Ist ein Rundweg? " + istRundweg("ABCA", niko));
+		TIO.prt("Ist valide? " + istValide(TIO.AskString("Bitte validen Weg angeben:").toUpperCase(), niko));
+		TIO.prt("Ist ein Rundweg? " + istRundweg(TIO.AskString("Bitte Rundweg angeben").toUpperCase(), niko));
 	}
 
 	public Graph genNiko()
