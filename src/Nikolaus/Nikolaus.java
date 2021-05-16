@@ -1,6 +1,7 @@
 package Nikolaus;
 
 import lib.List;
+import lib.TIO;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -15,6 +16,8 @@ public class Nikolaus
 	public Nikolaus()
 	{
 		niko = genNiko();
+		TIO.prt("Ist valide? " + istValide("ABC", niko));
+		TIO.prt("Ist ein Rundweg? " + istRundweg("ABCA", niko));
 	}
 
 	public Graph genNiko()
@@ -42,8 +45,45 @@ public class Nikolaus
 
 		edgeList.toFirst();
 		while(edgeList.hasAccess())
+		{
 			haus.addEdge(edgeList.getContent());
+			edgeList.next();
+		}
 
 		return haus;
+	}
+
+	public boolean istRundweg(String pWeg, Graph pGraph)
+	{
+		char[] wegArray = pWeg.toCharArray();
+		if(wegArray[0]==wegArray[wegArray.length-1] && istValide(pWeg, pGraph))
+			return true;
+		else
+			return false;
+	}
+
+	public boolean istValide(String pWeg, Graph pGraph)
+	{
+		char[] wegArray = pWeg.toCharArray();
+
+		for(int i=0; i<wegArray.length-1; i++)
+		{
+			List<Vertex> nachbarn = pGraph.getNeighbours(pGraph.getVertex(Character.toString(wegArray[i])));
+			boolean hatNachbar = false;
+
+			nachbarn.toFirst();
+
+			while(!hatNachbar && nachbarn.hasAccess())
+			{
+				if(nachbarn.getContent().equals(pGraph.getVertex(Character.toString(wegArray[i+1]))))
+					hatNachbar = true;
+
+				nachbarn.next();
+			}
+
+			if(!hatNachbar)
+				return false;
+		}
+		return true;
 	}
 }
