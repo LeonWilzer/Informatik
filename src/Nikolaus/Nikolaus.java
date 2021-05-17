@@ -3,8 +3,6 @@ package Nikolaus;
 import lib.List;
 import lib.TIO;
 
-import java.util.HashMap;
-import java.util.Map;
 
 import lib.Edge;
 import lib.Graph;
