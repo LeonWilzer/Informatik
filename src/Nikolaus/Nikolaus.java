@@ -24,31 +24,19 @@ public class Nikolaus
 	{
 		String nameList = "ABCDE";
 
-		Map<Character,Vertex> vertexDict = new HashMap<Character, Vertex>();
-		List<Edge> edgeList = new List<Edge>();
 		Graph haus = new Graph();
 
 		for(char pID : nameList.toCharArray())
-			vertexDict.put(pID, new Vertex(Character.toString(pID)));
+			haus.addVertex(new Vertex(Character.toString(pID)));
 
-		edgeList.append(new Edge(vertexDict.get('A'), vertexDict.get('B'), 0));
-		edgeList.append(new Edge(vertexDict.get('B'), vertexDict.get('C'), 0));
-		edgeList.append(new Edge(vertexDict.get('C'), vertexDict.get('A'), 0));
-		edgeList.append(new Edge(vertexDict.get('A'), vertexDict.get('E'), 0));
-		edgeList.append(new Edge(vertexDict.get('E'), vertexDict.get('C'), 0));
-		edgeList.append(new Edge(vertexDict.get('C'), vertexDict.get('D'), 0));
-		edgeList.append(new Edge(vertexDict.get('D'), vertexDict.get('E'), 0));
-		edgeList.append(new Edge(vertexDict.get('E'), vertexDict.get('B'), 0));
-
-		for(char key : nameList.toCharArray())
-			haus.addVertex(vertexDict.get(key));
-
-		edgeList.toFirst();
-		while(edgeList.hasAccess())
-		{
-			haus.addEdge(edgeList.getContent());
-			edgeList.next();
-		}
+		haus.addEdge(new Edge(haus.getVertex("A"), haus.getVertex("B"), 0));
+		haus.addEdge(new Edge(haus.getVertex("B"), haus.getVertex("C"), 0));
+		haus.addEdge(new Edge(haus.getVertex("C"), haus.getVertex("A"), 0));
+		haus.addEdge(new Edge(haus.getVertex("A"), haus.getVertex("E"), 0));
+		haus.addEdge(new Edge(haus.getVertex("E"), haus.getVertex("C"), 0));
+		haus.addEdge(new Edge(haus.getVertex("C"), haus.getVertex("D"), 0));
+		haus.addEdge(new Edge(haus.getVertex("D"), haus.getVertex("E"), 0));
+		haus.addEdge(new Edge(haus.getVertex("E"), haus.getVertex("B"), 0));
 
 		return haus;
 	}
