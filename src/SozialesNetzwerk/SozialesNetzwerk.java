@@ -1,3 +1,8 @@
+package SozialesNetzwerk;
+
+import lib.Edge;
+import lib.Graph;
+import lib.Vertex;
 
 /**
  * Beschreiben Sie hier die Klasse SozialesNetzwerk.
