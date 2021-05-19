@@ -3,6 +3,7 @@ package Main;
 import lib.TIO;
 import Morse.Morse;
 import Nikolaus.Nikolaus;
+import SozialesNetzwerk.SozialesNetzwerk;
 import SymMan.ZeichenVerwaltung;
 import Termtree.Termtree;
 import UserAdministration.Benutzerverwaltung;
@@ -23,7 +24,8 @@ public class Main {
             "3. Termtree\n" + 
             "4. Benutzerverwaltung\n" +
             "5. Haus des Nikolaus\n" +
-            "6. Zeichenbaum"
+            "6. Zeichenbaum\n" +
+            "7. Soziales Netzwerk"
             );
         switch(choice)
         {
@@ -51,7 +53,10 @@ public class Main {
                 TIO.cls();
                 new Nikolaus();
                 break;
-
+            case 7:
+                TIO.cls();
+                new SozialesNetzwerk();
+                break;
         }
     }
 }

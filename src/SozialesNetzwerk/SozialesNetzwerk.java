@@ -1,7 +1,10 @@
 package SozialesNetzwerk;
 
+import lib.BetterList;
 import lib.Edge;
 import lib.Graph;
+import lib.List;
+import lib.TIO;
 import lib.Vertex;
 
 /**
@@ -59,8 +62,8 @@ public class SozialesNetzwerk
        meinNetz.addEdge(new Edge(h,i,1));
        meinNetz.addEdge(new Edge(i,j,1));
            
-       
-            
+       TIO.prt("Dichte: " + gibDichte());
+       TIO.prt("Zentralität: " + gibZentralität(e));
     }
 /**
  * Die Methode liefert die Dichte des sozialen Netzwerks.
@@ -68,17 +71,36 @@ public class SozialesNetzwerk
     
    public int gibDichte()
    {
-      return 0;
+      int m = size(meinNetz.getEdges());
+      int n = size(meinNetz.getVertices());
+      int dichte = 2*m/n*(n-1);
+   
+      return dichte;
    }
    
  /**
  * Die Methode liefert den Zentralitätsgrad des im Parameter angegebenen Knoten pVertex im sozialen Netzwerk.
  */
-   public int gibZentralität(Vertex pVertex)
+   public double gibZentralität(Vertex pVertex)
    {
-       //hier entsteht die Methode, die den Zentralitätsgrad des Knoten pVertex zurückliefert
-       return 0;
+      //BetterList<Edge> edges = (BetterList<Edge>) meinNetz.getEdges(pVertex);
+      double d = size(meinNetz.getEdges(pVertex));
+      //BetterList<Vertex> vertices = (BetterList<Vertex>) meinNetz.getVertices();
+      double n = size(meinNetz.getVertices());
+      double zentral = d / (n-1);
+      return zentral;
    }
    
-   
+   public int size(List pList)
+    {
+        int count = 0;
+
+        pList.toFirst();
+        while(pList.hasAccess())
+            {
+                count++;
+                pList.next();
+            }
+        return count;
+     }
 }
