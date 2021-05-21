@@ -1,6 +1,5 @@
 package SozialesNetzwerk;
 
-import lib.BetterList;
 import lib.Edge;
 import lib.Graph;
 import lib.List;
@@ -63,17 +62,17 @@ public class SozialesNetzwerk
        meinNetz.addEdge(new Edge(i,j,1));
            
        TIO.prt("Dichte: " + gibDichte());
-       TIO.prt("Zentralität: " + gibZentralität(e));
+       TIO.prt("Zentralität: " + gibZentralität(b));
     }
 /**
  * Die Methode liefert die Dichte des sozialen Netzwerks.
  */
     
-   public int gibDichte()
+   public double gibDichte()
    {
-      int m = size(meinNetz.getEdges());
-      int n = size(meinNetz.getVertices());
-      int dichte = 2*m/n*(n-1);
+      double m = size(meinNetz.getEdges());
+      double n = size(meinNetz.getVertices());
+      double dichte = (2*m)/(n*(n-1));
    
       return dichte;
    }
