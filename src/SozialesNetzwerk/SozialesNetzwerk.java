@@ -82,9 +82,7 @@ public class SozialesNetzwerk
  */
    public double gibZentralität(Vertex pVertex)
    {
-      //BetterList<Edge> edges = (BetterList<Edge>) meinNetz.getEdges(pVertex);
       double d = size(meinNetz.getEdges(pVertex));
-      //BetterList<Vertex> vertices = (BetterList<Vertex>) meinNetz.getVertices();
       double n = size(meinNetz.getVertices());
       double zentral = d / (n-1);
       return zentral;
