@@ -15,16 +15,17 @@ public class Main {
 
     public void Menu()
     {
-        int choice = TIO.AskInt(
-            "Please select a method for execution:\n" + 
-            "0. Cancel\n" +
-            "1. Morse Decoder\n" +
-            "2. Morse Encoder\n" +
-            "3. Termtree\n" + 
-            "4. Benutzerverwaltung\n" +
-            "5. Haus des Nikolaus\n" +
-            "6. Zeichenbaum"
-            );
+        int choice = TIO.AskInt("""
+            Please select a method for execution:
+            0. Cancel
+            1. Morse Decoder
+            2. Morse Encoder
+            3. Termtree
+            4. Benutzerverwaltung
+            5. Haus des Nikolaus
+            6. Zeichenbaum
+            """);
+
         switch(choice)
         {
             case 1:
