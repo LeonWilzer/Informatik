@@ -1,5 +1,6 @@
 package SymMan;
 
+import lib.BinarySearchDrawer;
 import lib.BinarySearchTree;
 import lib.TIO;
 
@@ -42,10 +43,12 @@ public class ZeichenVerwaltung {
     public static void Demo()
     {
         ZeichenVerwaltung zeiver = new ZeichenVerwaltung(TIO.AskString("Ein Wort bitte:"));
+        BinarySearchDrawer bzeich = new BinarySearchDrawer(200, 200, zeiver.getBaum());
         TIO.prt("doe");
     }
 
     // Getters & Setters
     //public String getWord() { return wort; }
     //public void setWord(String pWort) { wort = pWort; }
+    public BinarySearchTree<ZeichenMitAnzahl> getBaum() { return zeichenBaum; }
 }

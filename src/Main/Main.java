@@ -3,6 +3,7 @@ package Main;
 import lib.TIO;
 import Morse.Morse;
 import Nikolaus.Nikolaus;
+import SozialesNetzwerk.SozialesNetzwerk;
 import SymMan.ZeichenVerwaltung;
 import Termtree.Termtree;
 import UserAdministration.Benutzerverwaltung;
@@ -15,6 +16,7 @@ public class Main {
 
     public void Menu()
     {
+<<<<<<< HEAD
         int choice = TIO.AskInt("""
             Please select a method for execution:
             0. Cancel
@@ -26,6 +28,19 @@ public class Main {
             6. Zeichenbaum
             """);
 
+=======
+        int choice = TIO.AskInt(
+            "Please select a method for execution:\n" + 
+            "0. Cancel\n" +
+            "1. Morse Decoder\n" +
+            "2. Morse Encoder\n" +
+            "3. Termtree\n" + 
+            "4. Benutzerverwaltung\n" +
+            "5. Haus des Nikolaus\n" +
+            "6. Zeichenbaum\n" +
+            "7. Soziales Netzwerk"
+            );
+>>>>>>> a32f011f90057591e5b56a3f75f201e713f41b62
         switch(choice)
         {
             case 1:
@@ -52,7 +67,10 @@ public class Main {
                 TIO.cls();
                 new Nikolaus();
                 break;
-
+            case 7:
+                TIO.cls();
+                new SozialesNetzwerk();
+                break;
         }
     }
 }

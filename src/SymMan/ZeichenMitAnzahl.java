@@ -36,4 +36,5 @@ public class ZeichenMitAnzahl implements ComparableContent<ZeichenMitAnzahl>{
 
     public int getAnzahl() { return anzahl; }
     public String getZeichen() { return zeichen; }
+    public String toString() { return zeichen + ": " + anzahl; }
 }
