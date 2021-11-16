@@ -16,19 +16,6 @@ public class Main {
 
     public void Menu()
     {
-<<<<<<< HEAD
-        int choice = TIO.AskInt("""
-            Please select a method for execution:
-            0. Cancel
-            1. Morse Decoder
-            2. Morse Encoder
-            3. Termtree
-            4. Benutzerverwaltung
-            5. Haus des Nikolaus
-            6. Zeichenbaum
-            """);
-
-=======
         int choice = TIO.AskInt(
             "Please select a method for execution:\n" + 
             "0. Cancel\n" +
@@ -40,7 +27,6 @@ public class Main {
             "6. Zeichenbaum\n" +
             "7. Soziales Netzwerk"
             );
->>>>>>> a32f011f90057591e5b56a3f75f201e713f41b62
         switch(choice)
         {
             case 1:
