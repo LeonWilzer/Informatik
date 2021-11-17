@@ -19,7 +19,7 @@ import java.sql.*;
  * @version 2016-01-24
  */
 public class DatabaseConnector{
-  private Connection connection;  
+  private java.sql.Connection connection;  
   private QueryResult currentQueryResult = null;
   private String message = null;
 
