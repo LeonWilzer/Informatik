@@ -10,6 +10,11 @@ public class ChatClient extends Client{
 	private List<String> messages;
 	private String username;
 
+	public static void main(String[] args) {
+		new ChatClient(TIO.AskString("Server IP?"), TIO.AskInt("Server Port?"), TIO.AskString("Username?")).run();
+
+	}
+
 	public ChatClient(String pServerIP, int pServerPort, String pUsername)
 	{
 		super(pServerIP, pServerPort);
