@@ -21,7 +21,7 @@ package lib;
  * </p>
  * 
  * @author Qualitaets- und UnterstuetzungsAgentur - Landesinstitut fuer Schule
- * @version Generisch_06 2015-10-25
+ * @version Generisch_06 2015-/5
  */
 public class List<ContentType> {
 

@@ -1,6 +1,5 @@
 package EvilCHat;
 
-
 /**
  * Ein Messenger-Server
  * 
@@ -11,9 +10,14 @@ package EvilCHat;
 import javax.swing.JOptionPane;
 import lib.List;
 import lib.Server;
+import lib.TIO;
 
 public class MessengerServer extends Server {
 	private List<Teilnehmer> angemeldeteTeilnehmer;
+
+	public static void main(String[] args) {
+		new MessengerServer(TIO.AskInt("Port?"));
+	}
 
 	public MessengerServer(int pPort) {
 		super(pPort);
@@ -28,53 +32,51 @@ public class MessengerServer extends Server {
 
 	@Override
 	public void processNewConnection(String pClientIP, int pClientPort) {
-		send(pClientIP, pClientPort,
-			PROT.SC_WK + PROT.TRENNER + "Willkommen auf dem Messenger-Server!");
+		send(pClientIP, pClientPort, PROT.SC_WK + PROT.TRENNER + "Willkommen auf dem Messenger-Server!");
 	}
 
-  @Override
-  public synchronized void processMessage(String pClientIP, int pClientPort, String pMessage) {
-	String[] pMessageZerteilt = pMessage.split(PROT.TRENNER);
-	System.out.println("C0:" + pMessageZerteilt[0] + "!");
-	if (!istTeilnehmerAngemeldet(pClientIP, pClientPort)) {
-	  if (pMessageZerteilt[0].equals(PROT.CS_AN)) {
-		if (istNameVergeben(pMessageZerteilt[1]))
-		  send(pClientIP, pClientPort, PROT.SC_ER + PROT.TRENNER + "Der Name ist bereits vergeben!");
-		else {
-		  meldeTeilnehmerAn(pClientIP, pClientPort, pMessageZerteilt[1]);
-		  send(pClientIP, pClientPort,PROT.SC_AO + PROT.TRENNER + pMessageZerteilt[1]);         
+	@Override
+	public synchronized void processMessage(String pClientIP, int pClientPort, String pMessage) {
+		String[] pMessageZerteilt = pMessage.split(PROT.TRENNER);
+		System.out.println("C0:" + pMessageZerteilt[0] + "!");
+		if (!istTeilnehmerAngemeldet(pClientIP, pClientPort)) {
+			if (pMessageZerteilt[0].equals(PROT.CS_AN)) {
+				if (istNameVergeben(pMessageZerteilt[1]))
+					send(pClientIP, pClientPort, PROT.SC_ER + PROT.TRENNER + "Der Name ist bereits vergeben!");
+				else {
+					meldeTeilnehmerAn(pClientIP, pClientPort, pMessageZerteilt[1]);
+					send(pClientIP, pClientPort, PROT.SC_AO + PROT.TRENNER + pMessageZerteilt[1]);
+				}
+			} else {
+				System.out.println("FEHLER");
+				send(pClientIP, pClientPort, PROT.SC_ER + PROT.TRENNER + "Sie sind nicht angemeldet!");
+			}
+		} else {
+			switch (pMessageZerteilt[0]) {
+			case PROT.CS_AN:
+				send(pClientIP, pClientPort, PROT.SC_ER + PROT.TRENNER + "Sie sind bereits angemeldet!");
+				break;
+			case PROT.CS_GA:
+				send(pClientIP, pClientPort, PROT.SC_AT + PROT.TRENNER + gibAlleAngemeldetenTeilnehmernamen());
+				break;
+			case PROT.CS_NA:
+				sendToAll(PROT.SC_ZU + PROT.TRENNER + findeTeilnehmernameZuIPAdresseUndPort(pClientIP, pClientPort));
+				break;
+			case PROT.CS_AB:
+				sendToAll(PROT.SC_AB + PROT.TRENNER + findeTeilnehmernameZuIPAdresseUndPort(pClientIP, pClientPort));
+				meldeTeilnehmerAb(pClientIP, pClientPort);
+				closeConnection(pClientIP, pClientPort);
+				break;
+			case PROT.CS_TX:
+				String empfaengerIP = findeIPAdresseZuTeilnehmer(pMessageZerteilt[1]);
+				int empfaengerPort = findePortZuTeilnehmer(pMessageZerteilt[1]);
+				String senderName = findeTeilnehmernameZuIPAdresseUndPort(pClientIP, pClientPort);
+				send(empfaengerIP, empfaengerPort,
+						PROT.SC_TX + PROT.TRENNER + senderName + PROT.TRENNER + pMessageZerteilt[2]);
+				break;
+			}
 		}
-	  } else {
-		System.out.println("FEHLER");
-		send(pClientIP, pClientPort,PROT.SC_ER + PROT.TRENNER + "Sie sind nicht angemeldet!");
-	  }
-	} else {
-	  switch (pMessageZerteilt[0]) {
-		case PROT.CS_AN:
-		  send(pClientIP, pClientPort, PROT.SC_ER + PROT.TRENNER + "Sie sind bereits angemeldet!");
-		  break;
-		case PROT.CS_GA:
-		  send(pClientIP, pClientPort, PROT.SC_AT + PROT.TRENNER + gibAlleAngemeldetenTeilnehmernamen());
-		  break;
-		case PROT.CS_NA:
-		  sendToAll(PROT.SC_ZU + PROT.TRENNER + findeTeilnehmernameZuIPAdresseUndPort(pClientIP, pClientPort));
-		  break;
-		case PROT.CS_AB:
-		  sendToAll(PROT.SC_AB + PROT.TRENNER + findeTeilnehmernameZuIPAdresseUndPort(pClientIP, pClientPort));
-		  meldeTeilnehmerAb(pClientIP, pClientPort);
-		  closeConnection(pClientIP, pClientPort);
-		  break;
-		case PROT.CS_TX:
-		  String empfaengerIP = findeIPAdresseZuTeilnehmer(pMessageZerteilt[1]);
-		  int empfaengerPort = findePortZuTeilnehmer(pMessageZerteilt[1]);
-		  String senderName = findeTeilnehmernameZuIPAdresseUndPort(pClientIP, pClientPort);
-		  send(empfaengerIP, empfaengerPort,PROT.SC_TX + PROT.TRENNER 
-											+ senderName 
-											+ PROT.TRENNER + pMessageZerteilt[2]);
-		  break;
-	  }
 	}
-  }
 
 	@Override
 	public synchronized void processClosingConnection(String pClientIP, int pClientPort) {
@@ -93,7 +95,7 @@ public class MessengerServer extends Server {
 		angemeldeteTeilnehmer.toFirst();
 		while (angemeldeteTeilnehmer.hasAccess() && !gefunden) {
 			if (angemeldeteTeilnehmer.getContent().gibIPAdresse().equals(pClientIP)
-			&& angemeldeteTeilnehmer.getContent().gibPort() == pClientPort) {
+					&& angemeldeteTeilnehmer.getContent().gibPort() == pClientPort) {
 				angemeldeteTeilnehmer.getContent().setzeAngemeldet(false);
 				angemeldeteTeilnehmer.getContent().setzeName(null);
 				angemeldeteTeilnehmer.remove();
@@ -108,9 +110,9 @@ public class MessengerServer extends Server {
 		boolean gefunden = false;
 		boolean angemeldet = false;
 		angemeldeteTeilnehmer.toFirst();
-		while  (angemeldeteTeilnehmer.hasAccess() && !gefunden) {
+		while (angemeldeteTeilnehmer.hasAccess() && !gefunden) {
 			if (angemeldeteTeilnehmer.getContent().gibIPAdresse().equals(pClientIP)
-			&& angemeldeteTeilnehmer.getContent().gibPort() == pClientPort) {
+					&& angemeldeteTeilnehmer.getContent().gibPort() == pClientPort) {
 				angemeldet = angemeldeteTeilnehmer.getContent().istAngemeldet();
 				gefunden = true;
 			} else {
@@ -169,7 +171,7 @@ public class MessengerServer extends Server {
 		angemeldeteTeilnehmer.toFirst();
 		while (angemeldeteTeilnehmer.hasAccess() && !gefunden) {
 			if (angemeldeteTeilnehmer.getContent().gibIPAdresse().equals(pClientIP)
-			&& angemeldeteTeilnehmer.getContent().gibPort() == pClientPort) {
+					&& angemeldeteTeilnehmer.getContent().gibPort() == pClientPort) {
 				gefundenerTeilnehmername = angemeldeteTeilnehmer.getContent().gibName();
 				gefunden = true;
 			} else {
@@ -193,5 +195,4 @@ public class MessengerServer extends Server {
 		}
 	}
 
-	
 }
