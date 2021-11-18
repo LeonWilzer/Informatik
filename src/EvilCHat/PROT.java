@@ -35,7 +35,7 @@ public class PROT {
 	public static final String CS_AN = "+ANMELDEN";
 
 	public static final String CS_GA ="+GIB_ALLE_TN";
-        
+		
 	public static final String CS_NA ="+SENDE_NAME_AN_ALLE";
 	// Mit Trenner wird der Name des Empfaengers und die Nachricht angehaengt
 	public static final String CS_TX = "+TEXT";

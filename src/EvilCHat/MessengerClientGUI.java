@@ -92,7 +92,7 @@ public class MessengerClientGUI extends JFrame {
 		taNachrichten.setLineWrap(true);
 		cp.add(taNachrichtenScrollPane);
 		DefaultCaret caret = (DefaultCaret)taNachrichten.getCaret();
-                caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
+				caret.setUpdatePolicy(DefaultCaret.ALWAYS_UPDATE);
 		
 		lProtokoll.setBounds(16, 83, 142, 20);
 		lProtokoll.setText("Nachrichtenverlauf");
