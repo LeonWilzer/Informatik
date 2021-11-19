@@ -3,6 +3,8 @@ package Main;
 import lib.TIO;
 import Chat.ChatClient;
 import Chat.ChatServer;
+import EvilCHat.MessengerClientTUI;
+import EvilCHat.MessengerServer;
 import Morse.Morse;
 import Nikolaus.Nikolaus;
 import SozialesNetzwerk.SozialesNetzwerk;
@@ -18,19 +20,21 @@ public class Main {
 
     public void Menu()
     {
-        int choice = TIO.AskInt(
-            "Please select a method for execution:\n" + 
-            "0. Cancel\n" +
-            "1. Morse Decoder\n" +
-            "2. Morse Encoder\n" +
-            "3. Termtree\n" + 
-            "4. Benutzerverwaltung\n" +
-            "5. Haus des Nikolaus\n" +
-            "6. Zeichenbaum\n" +
-            "7. Soziales Netzwerk\n" +
-            "8. Chat Client\n" +
-            "9. Chat Server"
-            );
+        int choice = TIO.AskInt("""
+            Please select a method for execution:
+            0. Cancel
+            1. Morse Decoder
+            2. Morse Encoder
+            3. Termtree
+            4. Benutzerverwaltung
+            5. Haus des Nikolaus
+            6. Zeichenbaum
+            7. Soziales Netzwerk
+            8. Chat Client
+            9. Chat Server
+            10. EvilChat Client
+            11. EvilChat Server
+            """);
         TIO.cls();
         switch(choice)
         {
@@ -60,6 +64,15 @@ public class Main {
                 break;
             case 9:
                 new ChatServer(TIO.AskInt("Port?"), TIO.AskString("Server Name?"));
+                break;
+            case 10:
+                new MessengerClientTUI().run();
+                break;
+            case 11:
+                new MessengerServer(TIO.AskInt("Port?"));
+                break;
+            default:
+                TIO.prt("Please select a number ranging from 1 to 11");
                 break;
         }
     }

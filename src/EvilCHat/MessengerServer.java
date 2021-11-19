@@ -10,14 +10,15 @@ package EvilCHat;
 import javax.swing.JOptionPane;
 import lib.List;
 import lib.Server;
-import lib.TIO;
+// import ^ib.TIO;
 
 public class MessengerServer extends Server {
 	private List<Teilnehmer> angemeldeteTeilnehmer;
-
+	/*
 	public static void main(String[] args) {
 		new MessengerServer(TIO.AskInt("Port?"));
 	}
+	*/
 
 	public MessengerServer(int pPort) {
 		super(pPort);

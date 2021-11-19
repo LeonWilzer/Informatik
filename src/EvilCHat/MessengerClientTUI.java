@@ -12,11 +12,12 @@ public class MessengerClientTUI implements UI {
 	private List<ClientInterface> clients;
 	private Scanner sc;
 	private boolean autoFocus;
-
+	/*
 	public static void main(String[] args) {
 		MessengerClientTUI ui = new MessengerClientTUI();
 		ui.run();
 	}
+	*/
 
 	public MessengerClientTUI() {
 		clients = new List<ClientInterface>();
@@ -48,10 +49,27 @@ public class MessengerClientTUI implements UI {
 							Displays this help.
 						2. /exit
 							Closes the client.
+						3. /login <username>
+							Logs you into the current server.
+						4. /logout
+							Logs you out of the current server.
+						5. /nextServer
+						   /ns
+						   Switch focus to the next server in the list.
+						6. /toggleAutoFocus
+							Toggles whether or not to focus automatically when receiving a message.
+						7. /whisper <recipient> [message]
+						   /w
+						   Send a private message to the specified recipient.
 										""", MessageType.INFO);
 				break;
 			case "/exit":
-				curCl.close();
+				clients.toFirst();
+				while(clients.hasAccess())
+				{
+					clients.getContent().logout();
+					clients.next();
+				}
 				System.exit(0);
 				break;
 			case "/connect":
@@ -63,6 +81,16 @@ public class MessengerClientTUI implements UI {
 				break;
 			case "/logout":
 				curCl.logout();
+				clients.toFirst();
+				while(clients.hasAccess())
+				{
+					if(clients.getContent()==curCl)
+					{
+						clients.remove();
+						break;
+					}
+					clients.next();
+				}
 			case "/nextServer":
 			case "/ns":
 				clients.next();

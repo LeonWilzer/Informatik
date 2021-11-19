@@ -50,7 +50,7 @@ public class MessengerClient extends Client implements ClientInterface {
 	@Override
 	public void processMessage(String pMessage) {
 		String[] pMessageZerteilt = pMessage.split(PROT.TRENNER);
-		System.out.println("S0:" + pMessageZerteilt[0] + "!");
+		// System.out.println("S0:" + pMessageZerteilt[0] + "!");
 
 		if (!angemeldet) {
 			switch (pMessageZerteilt[0]) {
@@ -68,6 +68,7 @@ public class MessengerClient extends Client implements ClientInterface {
 				angemeldet = true;
 				send(PROT.CS_GA);
 				send(PROT.CS_NA);
+				addMessage("", "Logged in.", MessageType.INFO);
 				// messengerClientGUI.initialisiereNachAnmeldung();
 				break;
 			// Hier fehlt noch die Fehlerbehandlung, falls versucht wurde sich mit einem
@@ -121,7 +122,8 @@ public class MessengerClient extends Client implements ClientInterface {
 				// JOptionPane.showMessageDialog(null,
 				// "Verbindung durch den Messenger-Server geschlossen.\nDas Programm wird jetzt
 				// beendet.");
-				System.exit(0);
+				// System.exit(0);
+				close();
 				// messengerClientGUI.setVisible(false);
 				break;
 
@@ -149,7 +151,7 @@ public class MessengerClient extends Client implements ClientInterface {
 	@Override
 	public void logout() {
 		// Client sendet Abmeldung an Server
-		send(PROT.CS_AB);
+		send(PROT.CS_AB+PROT.TRENNER);
 	}
 
 	@Override
@@ -158,7 +160,7 @@ public class MessengerClient extends Client implements ClientInterface {
 			// Client sendet TextNachricht zur Weiterleitung an Chatteilnehmer pEmpfaenger
 			// messengerClientGUI.ergaenzeNachrichten("Du schreibst an " + pEmpfaenger +
 			// "\n" + pNachricht);
-			send(PROT.CS_TX + PROT.TRENNER + pReceiver + PROT.CS_TX + pMessage);
+			send(PROT.CS_TX + PROT.TRENNER + pReceiver +PROT.TRENNER+ pMessage);
 			addMessage(eigenerName, pMessage, MessageType.OWN_MESSAGE);
 		}
 	}
@@ -170,7 +172,7 @@ public class MessengerClient extends Client implements ClientInterface {
 			} else {
 				users.toFirst();
 				while (users.hasAccess()) {
-					send(PROT.CS_TX + PROT.TRENNER + users.getContent() + PROT.CS_TX + pMessage);
+					send(PROT.CS_TX + PROT.TRENNER + users.getContent() + PROT.TRENNER + pMessage);
 					users.next();
 				}
 				addMessage(eigenerName, pMessage, MessageType.OWN_MESSAGE);
