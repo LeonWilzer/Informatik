@@ -60,7 +60,7 @@ public class MessengerClientTUI implements UI {
 							Toggles whether or not to focus automatically when receiving a message.
 						7. /whisper <recipient> [message]
 						   /w
-						   Send a private message to the specified recipient.
+							Send a private message to the specified recipient.
 										""", MessageType.INFO);
 				break;
 			case "/exit":
@@ -79,15 +79,7 @@ public class MessengerClientTUI implements UI {
 			case "/login":
 				curCl.login(com[1]);
 				break;
-			case "/logout":
-				curCl.logout();
-				clients.toFirst();
-				while(clients.hasAccess())
-				{
-					if(clients.getContent()==curCl)
-					{
-						clients.remove();
-						break;
+			}					break;
 					}
 					clients.next();
 				}
@@ -120,7 +112,7 @@ public class MessengerClientTUI implements UI {
 
 	@Override
 	public void renderFrame(ClientInterface pClient) {
-		if (autoFocus || curCl != pClient)
+		if (!autoFocus || curCl != pClient)
 			return;
 
 		TIO.cls();
