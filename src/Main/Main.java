@@ -1,6 +1,8 @@
 package Main;
 
 import lib.TIO;
+import BrainBreaker.Spiel;
+import BrainBreaker.Ziffernfolge;
 import Chat.ChatClient;
 import Chat.ChatServer;
 import EvilCHat.MessengerClientTUI;
@@ -34,6 +36,7 @@ public class Main {
             9. Chat Server
             10. EvilChat Client
             11. EvilChat Server
+            12. BrainBreaker
             """);
         TIO.cls();
         switch(choice)
@@ -70,6 +73,9 @@ public class Main {
                 break;
             case 11:
                 new MessengerServer(TIO.AskInt("Port?"));
+                break;
+            case 12:
+                int test = new Ziffernfolge("4344").ermittleBewertung(new Ziffernfolge("4434"));
                 break;
             default:
                 TIO.prt("Please select a number ranging from 1 to 11");

@@ -79,10 +79,6 @@ public class MessengerClientTUI implements UI {
 			case "/login":
 				curCl.login(com[1]);
 				break;
-			}					break;
-					}
-					clients.next();
-				}
 			case "/nextServer":
 			case "/ns":
 				clients.next();
