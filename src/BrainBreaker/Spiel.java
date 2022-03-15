@@ -14,8 +14,11 @@ public class Spiel {
         Random rnd = new Random();
         anzahlAbgegebenerTipps= 0;
         tipps = new List<Ziffernfolge>();
-        String code = "";
-        code +=  rnd.nextInt(6) + rnd.nextInt(6) + rnd.nextInt(6)+rnd.nextInt(6);
+        String code = new String();
+        code += rnd.nextInt(6);
+        code += rnd.nextInt(6);
+        code += rnd.nextInt(6);
+        code += rnd.nextInt(6);
         geheimerCode = new Ziffernfolge(code);
     }
     public void fuegeTippsHinzu(Ziffernfolge pTipp)
@@ -41,4 +44,19 @@ public class Spiel {
         }
         return tipps.getContent();
     }
+
+    public void computerZug()
+    {
+        int[] h = new int[4];
+        for(int i=0; i<6; i++)
+        {
+            Ziffernfolge zf = new Ziffernfolge(String.format("%o%o%o%o",i));
+            int bewertung = geheimerCode.ermittleBewertung(zf);
+            int anz = bewertung / 10;
+            h[i]=anz;
+        }
+
+        List<Ziffernfolge> liste = new List<Ziffernfolge>();
+    }
+
 }

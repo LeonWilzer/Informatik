@@ -75,10 +75,10 @@ public class Main {
                 new MessengerServer(TIO.AskInt("Port?"));
                 break;
             case 12:
-                int test = new Ziffernfolge("4344").ermittleBewertung(new Ziffernfolge("4434"));
+                TIO.prt(""+new Ziffernfolge(TIO.AskString("BB-Geheimcode")).ermittleBewertung(new Ziffernfolge(TIO.AskString("BB-Code"))));
                 break;
             default:
-                TIO.prt("Please select a number ranging from 1 to 11");
+                TIO.prt("Please select a number ranging from 1 to 12");
                 break;
         }
     }

@@ -6,7 +6,7 @@ public class Ziffernfolge {
     public Ziffernfolge(String pCodierung){
         ziffern = new int[4];
         for(int i=0;i<4;i++)
-            ziffern[i]=pCodierung.charAt(i);
+            ziffern[i]=Integer.parseInt(Character.toString(pCodierung.charAt(i)));
     }
 
     public int gibWert(int pIndex)
@@ -27,7 +27,7 @@ public class Ziffernfolge {
 
     public Ziffernfolge bildeKopie()
     {
-        Ziffernfolge zf = new Ziffernfolge("----");
+        Ziffernfolge zf = new Ziffernfolge("9999");
         for(int i=0;i<4;i++)
             zf.setzeWert(i, ziffern[i]);
 
