@@ -145,11 +145,3 @@ public class GraphServer extends Server {
         }
     }
 }
-
-enum Colour
-{
-    RED,
-    BLUE,
-    GREEN,
-    YELLOW
-}

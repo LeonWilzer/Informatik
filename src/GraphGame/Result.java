@@ -1,15 +1,6 @@
 package GraphGame;
 
-public interface Result {
-    
-}
-
-public enum Error
+public interface Result
 {
-    ERR
-}
-
-public enum Succ
-{
-    OK
+    public void resolve();
 }
