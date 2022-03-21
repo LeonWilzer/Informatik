@@ -3,45 +3,40 @@ package GraphGame;
 import lib.Client;
 
 public class GraphClient extends Client {
-    GraphClientTUI tui;
     char proposedTurnIndex;
     char proposedTurnColour;
 
     public GraphClient(String pServerIP, int pServerPort) {
         super(pServerIP, pServerPort);
-        tui = new GraphClientTUI();
+        GraphClientTUI.setStart(isConnected());
     }
-
-    private 
 
     @Override
     public void processMessage(String pMessage) {
         String words[] = pMessage.split("|");
 
-        switch(words[0]) {
+        switch (words[0]) {
             // the used protocol is just a concept draft
             case "OK":
-                turnCornfirm();
+                turnAccept();
                 break;
 
             case "YOUR_TURN":
                 turnStart();
                 break;
-            
+
             case "SET_COLOUR":
                 // example protocol: SET_COLOUR|B|RED
                 break;
         }
     }
 
-    private void turnPropose() {
+    // an turn the server accepted
+    private void turnAccept() {
         // TODO
     }
 
-    private void turnCornfirm() {
-        // TODO
-    }
-
+    // ask client user for his turn and send to server as proposal (accept or error will return)
     private void turnStart() {
         // TODO
     }
