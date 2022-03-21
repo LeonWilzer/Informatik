@@ -26,19 +26,27 @@ public class GraphClient extends Client {
                 break;
 
             case "SET_COLOUR":
-                // example protocol: SET_COLOUR|B|RED
+                // example protocol: SET_COLOUR|B|R (set node 'B' to red)
+                turnAccept(words);
                 break;
         }
     }
 
-    // an turn the server accepted
+    // turn the server accepted
     private void turnAccept() {
-        // TODO
+        GraphClientTUI.setTurn(new Turn('_', null, false)); // only the true part is relevant when confirming a turn in the TUI
+    }
+
+    // an turn the server accepted
+    private void turnAccept(String words[]) {
+        GraphClientTUI.setTurn(
+                new Turn(words[1].toCharArray()[0], ColourHelper.getColourFromChar(words[2].toCharArray()[0]), true));                                                                                                                   // TUI
     }
 
     // ask client user for his turn and send to server as proposal (accept or error will return)
     private void turnStart() {
-        // TODO
+        Turn turn = GraphClientTUI.getTurn(0);
+        super.send("SET_COLOUR|" + turn.getNode() + "|" + turn.getColour().toString());
     }
 
     private void updateGraph(char index, char colour) {
