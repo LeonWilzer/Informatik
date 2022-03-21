@@ -26,20 +26,19 @@ public class GraphClientTUI {
             default:
                 TIO.prt("It's your turn!");
                 break;
-            
+
             case 1:
                 TIO.prt("⚠️ Error: your input was invalid!");
                 TIO.prt("Make sure your input looks something like this \"A:G\" (this will color node 'A' in green)\n");
                 break;
-            
+
             case 2:
                 TIO.prt("⚠️ Error: The server reported an issue with your turn. Please try again.");
                 break;
         }
-        
+
         String result[] = TIO.AskString("Please enter your turn [Node:Color]: ").split(":");
         if (result.length != 3 && result[1].equals(":")) {
-            
             return getTurn(1);
         } else {
             TIO.prt("Submitting input..");
@@ -63,7 +62,7 @@ public class GraphClientTUI {
         if (userWon) {
             TIO.prt("\n🎊 Jayy! ✨ You have won the game! 🎉🎉🎉");
         } else {
-            TIO.prt("\nIt looks like your opponent had the edge over you. You'll surely win next time :)");     
+            TIO.prt("\nIt looks like your opponent had the edge over you. You'll surely win next time :)");
         }
 
         TIO.prt("The game has concluded and will now exit.");

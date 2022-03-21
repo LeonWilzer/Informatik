@@ -57,53 +57,50 @@ public class GraphServer extends Server {
 
     private int getPlayerID(String pIP, int pPort) {
         for (int i = 0; i < max_players; i++) {
-            if (players[i] == pIP + ":" + pPort)
+            if (players[i] == pIP + ":" + pPort) {
                 return i;
+            }
         }
         return -1;
     }
 
     private void buildGraph(int pNodeNum) {
         gameGraph = new Graph();
-        for (int i = 0; i < pNodeNum; i++)
+        for (int i = 0; i < pNodeNum; i++) {
             gameGraph.addVertex(new Vertex(Integer.toString(i)));
+        }
 
         for (int i = 0; i < pNodeNum; i++) {
             for (int j = 0; j < pNodeNum; i++) {
-                if (j != i && rnd.nextBoolean())
+                if (j != i && rnd.nextBoolean()) {
                     gameGraph.addEdge(new Edge(gameGraph.getVertex(Integer.toString(i)),
-                            gameGraph.getVertex(Integer.toString(j)), 0));
+                    gameGraph.getVertex(Integer.toString(j)), 0));
+                }
             }
         }
 
         colourArray = new Colour[pNodeNum];
     }
 
-    private Result takeTurn(int pPlayerID, int pNodeNum, Colour pColour)
-    {
-        if(current_player==pPlayerID)
-        {
+    private Result takeTurn(int pPlayerID, int pNodeNum, Colour pColour) {
+        if (current_player == pPlayerID) {
             Result turnResult = markNode(pNodeNum, pColour);
-            if(turnResult==Result.OK)
-            {
+            if (turnResult == Result.OK) {
                 playerpp();
                 return Result.OK;
-            }
-            else
-            {
+            } else {
                 // TODO
             }
-        }
-        else
-        {
+        } else {
             return Result.ERR_INVALID_USER;
         }
     }
 
     private void playerpp() {
         current_player++;
-        if (current_player >= max_players)
+        if (current_player >= max_players) {
             current_player = 0;
+        }
     }
 
     private Result markNode(int pNodeNum, Colour pColour) {
@@ -112,8 +109,9 @@ public class GraphServer extends Server {
             List<Vertex> neighbours = gameGraph.getNeighbours(node);
             neighbours.toFirst();
             while (neighbours.hasAccess()) {
-                if (colourArray[Integer.parseUnsignedInt(neighbours.getContent().getID())] == pColour)
+                if (colourArray[Integer.parseUnsignedInt(neighbours.getContent().getID())] == pColour) {
                     return false;
+                }
                 neighbours.next();
             }
             node.setMark(true);
