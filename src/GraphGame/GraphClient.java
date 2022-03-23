@@ -29,6 +29,9 @@ public class GraphClient extends Client {
                 // example protocol: SET_COLOUR|B|R (set node 'B' to red)
                 turnAccept(words);
                 break;
+            
+            case "WIN":
+
         }
     }
 
@@ -47,6 +50,11 @@ public class GraphClient extends Client {
     private void turnStart() {
         Turn turn = GraphClientTUI.getTurn(0);
         super.send("SET_COLOUR|" + turn.getNode() + "|" + turn.getColour().toString());
+    }
+
+    // show the winner
+    private void finish(String words[) {
+        GraphClientTUI.finish(words[1].toCharArray()[0]);
     }
 
     private void updateGraph(char index, char colour) {
