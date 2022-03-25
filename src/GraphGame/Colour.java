@@ -1,16 +1,13 @@
 package GraphGame;
 
-public enum Colour
-{
+public enum Colour {
     RED,
     BLUE,
     GREEN,
     YELLOW;
 
-    public char toChar()
-    {
-        switch(ordinal())
-        {
+    public char toChar() {
+        switch(ordinal()) {
             case 0:
                 return 'R';
             case 1:
@@ -19,6 +16,19 @@ public enum Colour
                 return 'G';
             default:
                 return 'Y';
+        }
+    }
+
+    public String toString() {
+        switch(ordinal()) {
+            case 0:
+                return "Red";
+            case 1:
+                return "Blue";
+            case 2:
+                return "Green";
+            default:
+                return "Yellow";
         }
     }
 }

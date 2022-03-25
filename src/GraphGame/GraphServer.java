@@ -11,7 +11,6 @@ import lib.Vertex;
 import lib.Edge;
 
 public class GraphServer extends Server {
-
 	Graph gameGraph;
 	int nodeAmount;
 	String[] players;
