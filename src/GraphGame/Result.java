@@ -1,15 +1,14 @@
 package GraphGame;
 
-public interface Result {
-    
-}
+import lib.Server;
 
-public enum Error
+public interface Result
 {
-    ERR
-}
+    public void resolve(Server pServer, String pClientIP, int pClientPort);
 
-public enum Succ
-{
-    OK
+    // Example:
+    // default public void resolve(Server pServer, String pClientIP, int pClientPort)
+    // {
+    //     pServer.send(pClientIP, pClientPort, "DEFAULT RESULT MESSAGE");
+    // }
 }
