@@ -59,7 +59,7 @@ public class GraphClientTUI {
 
     // tell user about who won the game
     public static void setFinish(char pWinner) {
-        if (pWinner.equals('1')) {
+        if (pWinner == '1') {
             TIO.prt("\n🎊 Jayy! ✨ You have won the game! 🎉🎉🎉");
         } else {
             TIO.prt("\nIt looks like your opponent had the edge over you. You'll surely win next time :)");

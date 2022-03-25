@@ -31,7 +31,7 @@ public class GraphClient extends Client {
                 break;
             
             case "WIN":
-
+                finish(words);
         }
     }
 
@@ -53,8 +53,8 @@ public class GraphClient extends Client {
     }
 
     // show the winner
-    private void finish(String words[) {
-        GraphClientTUI.finish(words[1].toCharArray()[0]);
+    private void finish(String words[]) {
+        GraphClientTUI.setFinish(words[1].toCharArray()[0]);
     }
 
     private void updateGraph(char index, char colour) {
