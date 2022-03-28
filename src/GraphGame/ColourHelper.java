@@ -5,6 +5,7 @@ public class ColourHelper {
         switch (pInput) {
             case 'R':
                 return Colour.RED;
+                
             case 'G':
                 return Colour.GREEN;
 
